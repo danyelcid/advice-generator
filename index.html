@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- displays site properly based on user's device -->
+
+  <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
+  <link rel="stylesheet" href="css/style.css">
+  
+  <title>Advice generator app</title>
+
+</head>
+<body>
+  <main class="main">
+    <div class="card">
+      <h1 class="title">Advice #<span id="id"></span></h1> 
+      <p class="content">"<span id="advice"></span>"</p>
+      <picture>
+        <source media="(max-width:376px)" srcset="images/pattern-divider-mobile.svg">
+        <img src="images/pattern-divider-desktop.svg" alt="">
+      </picture>
+      <div class="btn">
+        <img src="images/icon-dice.svg" alt="">
+      </div>
+    </div>
+  </main>
+
+
+
+
+
+
+  
+  
+  <footer class="attribution">
+    <p>
+      Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>.<br>
+      Coded by <a href="https://www.frontendmentor.io/profile/danyelcid" target="_blank">Dany el Cid</a>.
+    </p>
+  </footer>
+
+  <script src="js/jquery-3.1.1.min.js"></script>
+
+</script>
+
+
+  <script>
+  
+    $(document).ready(function(){
+
+      const advice = async() => {
+        try {
+          let resp = await fetch('https://api.adviceslip.com/advice')
+          let data = await resp.json()
+          $('#id').text(data.slip.id)
+          $('#advice').text(data.slip.advice)
+        } catch (error) {
+          console.log(error);
+        }
+        
+      }
+      advice()
+
+      $(".btn").click(function () {
+        advice()
+      })
+
+      $('.attribution').click(function(){
+        $(this).toggleClass('active')
+      })
+
+    })
+  </script>
+</body>
+</html>

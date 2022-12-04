@@ -1,0 +1,162 @@
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@800&display=swap'); 
+*,
+*::after,
+*::before{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+:root{
+    --light-cyan: hsl(193, 38%, 86%);
+    --neon-green: hsl(150, 100%, 66%);
+
+    --grayish-Blue: hsl(217, 19%, 38%);
+    --dark-Grayish-Blue: hsl(217, 19%, 24%);
+    --Dark-Blue: hsl(218, 23%, 16%);
+}
+
+body{
+    font-family: 'Manrope', sans-serif;
+    font-size: 1.75rem;
+    font-weight: 800;
+    background-color: var(--Dark-Blue);
+    color: var(--light-cyan);
+}
+
+main{
+    min-width: 100vw;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-inline: 1rem;
+}
+
+.card{
+    position: relative;
+    max-width: 33.75rem;
+    background-color: var(--dark-Grayish-Blue);
+    border-radius: 1rem;
+    padding: 3.25rem;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.title{
+    font-size: 1rem;
+    color: var(--neon-green);
+    text-transform: uppercase;
+    letter-spacing: 0.25rem;
+}
+img,
+picture{
+    display: block;
+    margin-inline: auto;
+    max-width: 100%;
+}
+picture{
+    margin-bottom: 1rem;
+}
+
+.btn{
+    position: absolute;
+    bottom: -2rem;
+    left: calc(50% - 2rem);
+    background-color: var(--neon-green);
+    width: 4rem;
+    height: 4rem;
+    border-radius: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.btn:hover{
+    cursor: pointer;
+    box-shadow: 0 0 2.25rem var(--neon-green);
+}
+
+
+/* attribution */
+.attribution{
+    position: absolute;
+    top: 2rem;
+    right: 2rem;
+    width: 2rem;
+    height: 2rem;
+    background-color: var(--neon-green);
+    cursor: pointer;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    border-radius: .25rem;
+    outline-offset: 4px;
+    transition: all .2s ease-in-out;
+    transition-delay: width 1s;
+}
+.attribution:hover{
+    cursor: pointer;
+    box-shadow: 0 0 1rem var(--neon-green);
+}
+.attribution::after,
+.attribution::before{
+    content: '';
+    position: absolute;
+    display: block;
+    background-color: var(--Dark-Blue);
+    z-index: 2;
+    transition: rotate .2s ease-in-out;
+    transition-delay: rotate .2s;
+}
+.attribution::before{
+    right: 6px;
+    width: 20px;
+    height: 4px;
+}
+.attribution::after{
+    right: 14px;
+    width: 4px;
+    height: 20px;
+}
+
+.attribution.active{
+    width: 16rem;
+    background-color: var(--Dark-Blue);
+    outline: 2px solid var(--neon-green);
+}
+
+.attribution.active::after,
+.attribution.active::before{
+    background-color: var(--neon-green);
+    rotate: 45deg;
+}
+
+.attribution p {
+    opacity: 0;
+    scale: 0;
+    transition: all .25s ease-in-out;
+    transition-delay: opacity 1s;
+}
+
+.attribution.active p{
+    opacity: 1;
+    scale: 1;
+}
+.attribution.active{
+    position: absolute;
+    top: 2rem;
+    right: 2rem;
+    color: var(--light-cyan);
+    font-size: .8rem;
+}
+.attribution a{
+    color: var(--neon-green);
+    text-decoration: none;
+}
+.attribution a:hover{
+    text-decoration: underline;
+}
