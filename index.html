@@ -14,6 +14,29 @@
   <main class="main">
     <div class="card">
       <h1 class="title">Advice #<span id="id"></span></h1> 
+      <div class="loading" id="loading">
+        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="margin: auto; background: transparent; display: block;" width="200px" height="200px" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid">
+          <path d="M20 25L80 25L80 75L20 75Z" fill="#ffffff" stroke="#52ffa8" stroke-width="3"></path><path d="M50 25L80 25L80 75L50 75" fill="#ffffff" stroke="#52ffa8" stroke-width="3" stroke-linejoin="round" stroke-linecap="round">
+            <animate attributeName="d" dur="1s" repeatCount="indefinite" begin="0s" keyTimes="0;0.5;0.501;1" values="M50 25L80 25L80 75L50 75;M50 25L50 20L50 80L50 75;M50 25L80 25L80 75L50 75;M50 25L80 25L80 75L50 75"></animate>
+            <animate attributeName="opacity" dur="1s" repeatCount="indefinite" begin="0s" keyTimes="0;0.5;0.5001;1" values="1;1;0;0"></animate>
+          </path><path d="M50 25L80 25L80 75L50 75" fill="#ffffff" stroke="#52ffa8" stroke-width="3" stroke-linejoin="round" stroke-linecap="round">
+            <animate attributeName="d" dur="1s" repeatCount="indefinite" begin="-0.166s" keyTimes="0;0.5;0.501;1" values="M50 25L80 25L80 75L50 75;M50 25L50 20L50 80L50 75;M50 25L80 25L80 75L50 75;M50 25L80 25L80 75L50 75"></animate>
+            <animate attributeName="opacity" dur="1s" repeatCount="indefinite" begin="-0.166s" keyTimes="0;0.5;0.5001;1" values="1;1;0;0"></animate>
+          </path><path d="M50 25L80 25L80 75L50 75" fill="#ffffff" stroke="#52ffa8" stroke-width="3" stroke-linejoin="round" stroke-linecap="round">
+            <animate attributeName="d" dur="1s" repeatCount="indefinite" begin="-0.33s" keyTimes="0;0.5;0.501;1" values="M50 25L80 25L80 75L50 75;M50 25L50 20L50 80L50 75;M50 25L80 25L80 75L50 75;M50 25L80 25L80 75L50 75"></animate>
+            <animate attributeName="opacity" dur="1s" repeatCount="indefinite" begin="-0.33s" keyTimes="0;0.5;0.5001;1" values="1;1;0;0"></animate>
+          </path><path d="M50 25L80 25L80 75L50 75" fill="#ffffff" stroke="#52ffa8" stroke-width="3" stroke-linejoin="round" stroke-linecap="round">
+            <animate attributeName="d" dur="1s" repeatCount="indefinite" begin="-0.33s" keyTimes="0;0.499;0.5;1" values="M50 25L20 25L20 75L50 75;M50 25L20 25L20 75L50 75;M50 25L50 20L50 80L50 75;M50 25L20 25L20 75L50 75"></animate>
+            <animate attributeName="opacity" dur="1s" repeatCount="indefinite" begin="-0.33s" keyTimes="0;0.4999;0.5;1" values="0;0;1;1"></animate>
+          </path><path d="M50 25L80 25L80 75L50 75" fill="#ffffff" stroke="#52ffa8" stroke-width="3" stroke-linejoin="round" stroke-linecap="round">
+            <animate attributeName="d" dur="1s" repeatCount="indefinite" begin="-0.166s" keyTimes="0;0.499;0.5;1" values="M50 25L20 25L20 75L50 75;M50 25L20 25L20 75L50 75;M50 25L50 20L50 80L50 75;M50 25L20 25L20 75L50 75"></animate>
+            <animate attributeName="opacity" dur="1s" repeatCount="indefinite" begin="-0.166s" keyTimes="0;0.4999;0.5;1" values="0;0;1;1"></animate>
+          </path><path d="M50 25L80 25L80 75L50 75" fill="#ffffff" stroke="#52ffa8" stroke-width="3" stroke-linejoin="round" stroke-linecap="round">
+            <animate attributeName="d" dur="1s" repeatCount="indefinite" begin="0s" keyTimes="0;0.499;0.5;1" values="M50 25L20 25L20 75L50 75;M50 25L20 25L20 75L50 75;M50 25L50 20L50 80L50 75;M50 25L20 25L20 75L50 75"></animate>
+            <animate attributeName="opacity" dur="1s" repeatCount="indefinite" begin="0s" keyTimes="0;0.4999;0.5;1" values="0;0;1;1"></animate>
+          </path>
+          </svg>
+      </div>
       <p class="content">"<span id="advice"></span>"</p>
       <picture>
         <source media="(max-width:376px)" srcset="images/pattern-divider-mobile.svg">
@@ -26,12 +49,6 @@
   </main>
 
 
-
-
-
-
-  
-  
   <footer class="attribution">
     <p>
       Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>.<br>
@@ -51,55 +68,52 @@
       /* ----Using ajax de jQuery ----*/
       
       function getAdv() {
-        let id = Math.round( Math.random() *224 )
+
+                $('#id').text('')
+                $('#advice').text('Loading')
+                $('#loading').show()
         
         $.ajax({
-              // URL to request
-              url : `https://api.adviceslip.com/advice/${id}`,
+              // URL for the request
+              url : `https://api.adviceslip.com/advice`,
 
-              // any data to send
+              // Any data to send
               //data : { id : 123 },
 
               // Type of request POST or GET
               type : 'GET',
 
-              // expected Data type of the response
+              // Type of information that is expected to be answered
               dataType : 'json',
 
-              // What to do when success  ;
+              // code to execute if the request is successful;
+              // the response is passed as an argument to the function
               success : function(json) {
-                $('#id').text(json.slip.id)
-                $('#advice').text(json.slip.advice)
+                setTimeout(() => {
+                  $('#loading').hide()
+                  $('#id').text(json.slip.id)
+                  $('#advice').text(json.slip.advice)
+                }, 250);
+
               },
 
-              // código a ejecutar si la petición falla;
-              // son pasados como argumentos a la función
-              // el objeto de la petición en crudo y código de estatus de la petición
+              //This allows to turn caching off
+              cache: false , 
+
+              // code to execute if the request fails;
+              // are passed as arguments to the function
+              // the raw request object and request status code
               error : function(xhr, status) {
                   alert('Disculpe, existió un problema');
               },
 
-              // código a ejecutar sin importar si la petición falló o no
+              // code to execute every time
               complete : function(xhr, status) {
                   console.log('Petición realizada');
               }
           });
 
       }
-  /* ----Using fetch de JavaScript----
-
-      const advice = async() => {
-        try {
-          let resp = await fetch('https://api.adviceslip.com/advice')
-          let data = await resp.json()
-          $('#id').text(data.slip.id)
-          $('#advice').text(data.slip.advice)
-        } catch (error) {
-          console.log(error);
-        }
-        
-      }
-  */
       getAdv()
 
       $(".btn").click(function () {

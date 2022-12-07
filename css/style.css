@@ -60,7 +60,10 @@ picture{
 picture{
     margin-bottom: 1rem;
 }
-
+.loading{
+    scale: .6;
+    margin: -4.5rem 0;
+}
 .btn{
     position: absolute;
     bottom: -2rem;
