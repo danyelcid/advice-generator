@@ -51,23 +51,22 @@
       /* ----Using ajax de jQuery ----*/
       
       function getAdv() {
+        let id = Math.round( Math.random() *224 )
         
         $.ajax({
-              // la URL para la petición
-              url : 'https://api.adviceslip.com/advice',
+              // URL to request
+              url : `https://api.adviceslip.com/advice/${id}`,
 
-              // la información a enviar
-              // (también es posible utilizar una cadena de datos)
+              // any data to send
               //data : { id : 123 },
 
-              // especifica si será una petición POST o GET
+              // Type of request POST or GET
               type : 'GET',
 
-              // el tipo de información que se espera de respuesta
+              // expected Data type of the response
               dataType : 'json',
 
-              // código a ejecutar si la petición es satisfactoria;
-              // la respuesta es pasada como argumento a la función
+              // What to do when success  ;
               success : function(json) {
                 $('#id').text(json.slip.id)
                 $('#advice').text(json.slip.advice)
