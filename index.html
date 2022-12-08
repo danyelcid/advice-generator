@@ -37,7 +37,7 @@
           </path>
           </svg>
       </div>
-      <p class="content">"<span id="advice"></span>"</p>
+      <p class="content" id="advice"></p>
       <picture>
         <source media="(max-width:376px)" srcset="images/pattern-divider-mobile.svg">
         <img src="images/pattern-divider-desktop.svg" alt="">
@@ -54,6 +54,7 @@
       Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>.<br>
       Coded by <a href="https://www.frontendmentor.io/profile/danyelcid" target="_blank">Dany el Cid</a>.
     </p>
+    <div class="box"></div>
   </footer>
 
   <script src="js/jquery-3.1.1.min.js"></script>
@@ -69,9 +70,10 @@
       
       function getAdv() {
 
-                $('#id').text('')
-                $('#advice').text('Loading')
-                $('#loading').show()
+        $('.btn').toggleClass('disabled')
+        $('#id').text('')
+        $('#advice').text('Seeking for Wisdom')
+        $('#loading').show()
         
         $.ajax({
               // URL for the request
@@ -92,7 +94,10 @@
                 setTimeout(() => {
                   $('#loading').hide()
                   $('#id').text(json.slip.id)
-                  $('#advice').text(json.slip.advice)
+                  $('#advice').text(`"${json.slip.advice}"`)
+
+                  $('.btn').toggleClass('disabled')
+
                 }, 250);
 
               },
@@ -104,12 +109,12 @@
               // are passed as arguments to the function
               // the raw request object and request status code
               error : function(xhr, status) {
-                  alert('Disculpe, existió un problema');
+                  alert('Sorry, There was a problem');
               },
 
               // code to execute every time
               complete : function(xhr, status) {
-                  console.log('Petición realizada');
+                console.log('task completed');
               }
           });
 
@@ -117,11 +122,14 @@
       getAdv()
 
       $(".btn").click(function () {
+        if ($(this).hasClass('disabled')) {
+          return
+        }
         getAdv()
       })
 
-      $('.attribution').click(function(){
-        $(this).toggleClass('active')
+      $('.box').click(function(){
+        $('.attribution').toggleClass('active')
       })
 
     })

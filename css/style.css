@@ -6,7 +6,6 @@
     margin: 0;
     padding: 0;
 }
-
 :root{
     --light-cyan: hsl(193, 38%, 86%);
     --neon-green: hsl(150, 100%, 66%);
@@ -23,7 +22,6 @@ body{
     background-color: var(--Dark-Blue);
     color: var(--light-cyan);
 }
-
 main{
     min-width: 100vw;
     min-height: 100vh;
@@ -32,7 +30,6 @@ main{
     align-items: center;
     padding-inline: 1rem;
 }
-
 .card{
     position: relative;
     max-width: 33.75rem;
@@ -44,7 +41,6 @@ main{
     flex-direction: column;
     gap: 2rem;
 }
-
 .title{
     font-size: 1rem;
     color: var(--neon-green);
@@ -76,12 +72,26 @@ picture{
     justify-content: center;
     align-items: center;
 }
-
+.btn.disabled::after{
+    position: absolute;
+    content: '';
+    inset: 1rem;
+    font-size: .8rem;
+    background-color: var(--Dark-Blue);
+    color: var(--neon-green);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 .btn:hover{
     cursor: pointer;
     box-shadow: 0 0 2.25rem var(--neon-green);
 }
-
+.btn.disabled:hover, .btn:disabled:hover{
+    cursor: not-allowed !important; 
+    box-shadow: 0 0 2.25rem var(--Dark-Blue);
+}
 
 /* attribution */
 .attribution{
@@ -90,8 +100,7 @@ picture{
     right: 2rem;
     width: 2rem;
     height: 2rem;
-    background-color: var(--neon-green);
-    cursor: pointer;
+    font-size: .7rem;
     z-index: 1;
     display: flex;
     align-items: center;
@@ -99,62 +108,54 @@ picture{
     border-radius: .25rem;
     outline-offset: 4px;
     transition: all .2s ease-in-out;
-    transition-delay: width 1s;
+
+}
+.box{
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 2rem;
+    height: 2rem;
+    background-color: var(--neon-green);
+    border-radius: .25rem;
+    border: 1px solid var(--Dark-Blue);
+    cursor: pointer;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
 }
 .attribution:hover{
-    cursor: pointer;
     box-shadow: 0 0 1rem var(--neon-green);
 }
-.attribution::after,
-.attribution::before{
+.box::after,
+.box::before{
     content: '';
     position: absolute;
     display: block;
     background-color: var(--Dark-Blue);
     z-index: 2;
     transition: rotate .2s ease-in-out;
-    transition-delay: rotate .2s;
 }
-.attribution::before{
-    right: 6px;
+.box::before{
+    right: 4px;
     width: 20px;
     height: 4px;
 }
-.attribution::after{
-    right: 14px;
+.box::after{
+    right: 12px;
     width: 4px;
     height: 20px;
 }
-
 .attribution.active{
     width: 16rem;
-    background-color: var(--Dark-Blue);
+    padding-left: .5rem;
     outline: 2px solid var(--neon-green);
-}
-
-.attribution.active::after,
-.attribution.active::before{
-    background-color: var(--neon-green);
-    rotate: 45deg;
-}
-
-.attribution p {
-    opacity: 0;
-    scale: 0;
-    transition: all .25s ease-in-out;
-    transition-delay: opacity 1s;
-}
-
-.attribution.active p{
-    opacity: 1;
-    scale: 1;
-}
-.attribution.active{
-    position: absolute;
-    top: 2rem;
-    right: 2rem;
     color: var(--light-cyan);
-    font-size: .8rem;
+}
+.attribution.active .box::after,
+.attribution.active .box::before{
+    rotate: 45deg;
 }
 .attribution a{
     color: var(--neon-green);
